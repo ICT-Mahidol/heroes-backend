@@ -17,6 +17,12 @@ public class SuperhumanController {
     @Autowired
     private WeaponRepository weaponRepository;
 
+    @GetMapping("/") // Map ONLY GET Requests
+    public @ResponseBody
+    String welcome () {
+        return "Hello, welcome to the Heroes application";
+    }
+
     @GetMapping("/addGet") // Map ONLY GET Requests
     public @ResponseBody
     String addNewHero (
