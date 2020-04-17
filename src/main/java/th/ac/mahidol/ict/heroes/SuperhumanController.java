@@ -125,7 +125,7 @@ public class SuperhumanController {
             v.setName(body.get("name").toString());
             v.setOrigin(body.get("origin").toString());
             v.setSuperpower(body.get("superpower").toString());
-            v.setImageURL(body.get("imageurl").toString());
+            v.setImageURL(body.get("imageURL").toString());
             if (body.get("weapons") != null) {
                 String[] weaponArray = body.get("weapons").toString().split(";");
                 List<Weapon> weaponList = new ArrayList<>();
