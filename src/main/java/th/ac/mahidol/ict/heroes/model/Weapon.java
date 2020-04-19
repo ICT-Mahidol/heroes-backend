@@ -1,4 +1,4 @@
-package th.ac.mahidol.ict.heroes;
+package th.ac.mahidol.ict.heroes.model;
 
 import javax.persistence.*;
 

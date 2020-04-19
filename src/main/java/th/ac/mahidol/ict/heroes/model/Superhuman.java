@@ -1,11 +1,11 @@
-package th.ac.mahidol.ict.heroes;
+package th.ac.mahidol.ict.heroes.model;
 
 import javax.persistence.*;
 import java.util.List;
 
 @SuppressWarnings("ALL")
 @Entity
-public abstract class Superhuman {
+public class Superhuman {
     @Id
     private Integer id;
     private String name;

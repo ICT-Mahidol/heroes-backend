@@ -1,9 +1,11 @@
 package th.ac.mahidol.ict.heroes;
 
-import net.bytebuddy.implementation.bind.annotation.Super;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import th.ac.mahidol.ict.heroes.model.*;
+import th.ac.mahidol.ict.heroes.repositories.SuperhumanRepository;
+import th.ac.mahidol.ict.heroes.repositories.WeaponRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,12 +19,14 @@ public class SuperhumanController {
     @Autowired
     private WeaponRepository weaponRepository;
 
+    @CrossOrigin
     @GetMapping("/") // Map ONLY GET Requests
     public @ResponseBody
     String welcome () {
         return "Hello, welcome to the Heroes application";
     }
 
+    @CrossOrigin
     @GetMapping("/addGet") // Map ONLY GET Requests
     public @ResponseBody
     String addNewHero (
@@ -86,129 +90,24 @@ public class SuperhumanController {
         return "Error: wrong superhuman type";
     }
 
-    @PostMapping("/add")
+    @CrossOrigin
+    @PostMapping("/heroes")
     public @ResponseBody
-    String addNewHeroPost(@RequestBody Map<String,Object> body) {
+    String addHero(@RequestBody Map<String,Object> body) {
         System.out.println(body);
         if (body.get("type").toString().equals("hero")) {
-            Hero h = new Hero();
-            h.setId(Integer.valueOf(body.get("id").toString()));
-            h.setName(body.get("name").toString());
-            h.setRealname(body.get("realname").toString());
-            h.setSuperpower(body.get("superpower").toString());
-            h.setImageURL(body.get("imageURL").toString());
-            if (body.get("weapons") != null) {
-                String[] weaponArray = body.get("weapons").toString().split(";");
-                List<Weapon> weaponList = new ArrayList<>();
-                for (String w : weaponArray) {
-                    String[] warray = w.split(",");
-                    weaponList.add(new Weapon(warray[0], warray[1], h));
-                }
-                h.setWeapons(weaponList);
-            }
-            if (body.get("humanFriends") != null) {
-                String[] friendArray = body.get("humanFriends").toString().split(";");
-                List<Human> friendList = new ArrayList<>();
-                for (String f: friendArray) {
-                    String[] farray = f.split(",");
-                    Human friend = new Human(Integer.valueOf(farray[0]), farray[1]);
-                    friend.addFriend(h);
-                    friendList.add(friend);
-                }
-                h.setHumanFriends(friendList);
-            }
+            Hero h = createNewHeroWithId(Integer.parseInt(body.get("id").toString()), body);
             superhumanRepository.save(h);
             return "Saved: " + h;
         } else if (body.get("type").toString().equals("villain")) {
-            Villain v = new Villain();
-            v.setId(Integer.parseInt(body.get("id").toString()));
-            v.setName(body.get("name").toString());
-            v.setOrigin(body.get("origin").toString());
-            v.setSuperpower(body.get("superpower").toString());
-            v.setImageURL(body.get("imageURL").toString());
-            if (body.get("weapons") != null) {
-                String[] weaponArray = body.get("weapons").toString().split(";");
-                List<Weapon> weaponList = new ArrayList<>();
-                for (String w : weaponArray) {
-                    String[] warray = w.split(",");
-                    weaponList.add(new Weapon(warray[0], warray[1], v));
-                }
-                v.setWeapons(weaponList);
-            }
+            Villain v = createNewVillainWithId(Integer.parseInt(body.get("id").toString()), body);
             superhumanRepository.save(v);
             return "Saved: " + v;
         }
         return "Error: wrong superhuman type";
     }
 
-    @PutMapping("/updateById/{id}")
-    public @ResponseBody
-    String addNewHeroPost(@PathVariable("id") int id, @RequestBody Map<String,Object> body) {
-        if (body.get("type").toString().equals("hero")) {
-            Hero h = new Hero();
-            h.setId(id);
-            h.setName(body.get("name").toString());
-            h.setRealname(body.get("realname").toString());
-            h.setSuperpower(body.get("superpower").toString());
-            h.setImageURL(body.get("imageURL").toString());
-            if (body.get("weapons") != null) {
-                String[] weaponArray = body.get("weapons").toString().split(";");
-                List<Weapon> weaponList = new ArrayList<>();
-                for (String w : weaponArray) {
-                    String[] warray = w.split(",");
-                    weaponList.add(new Weapon(warray[0], warray[1], h));
-                }
-                h.setWeapons(weaponList);
-            }
-            if (body.get("friends") != null) {
-                String[] friendArray = body.get("friends").toString().split(";");
-                List<Human> friendList = new ArrayList<>();
-                for (String f: friendArray) {
-                    String[] farray = f.split(",");
-                    Human friend = new Human(Integer.valueOf(farray[0]), farray[1]);
-                    friend.addFriend(h);
-                    friendList.add(friend);
-                }
-                h.setHumanFriends(friendList);
-            }
-            superhumanRepository.save(h);
-            return "Saved: " + h;
-        } else if (body.get("type").toString().equals("villain")) {
-            Villain v = new Villain();
-            v.setId(id);
-            v.setName(body.get("name").toString());
-            v.setOrigin(body.get("origin").toString());
-            v.setSuperpower(body.get("superpower").toString());
-            v.setImageURL(body.get("imageurl").toString());
-            if (body.get("weapons") != null) {
-                String[] weaponArray = body.get("weapons").toString().split(";");
-                List<Weapon> weaponList = new ArrayList<>();
-                for (String w : weaponArray) {
-                    String[] warray = w.split(",");
-                    weaponList.add(new Weapon(warray[0], warray[1], v));
-                }
-                v.setWeapons(weaponList);
-            }
-            superhumanRepository.save(v);
-            return "Saved: " + v;
-        }
-        return "Error: wrong superhuman type";
-    }
-
-    @DeleteMapping("/clean")
-    public @ResponseBody
-    String removeAllHeroes() {
-        superhumanRepository.deleteAll();
-        return "All data has been removed.";
-    }
-
-    @DeleteMapping("/deleteById/{id}")
-    public @ResponseBody
-    String removeHeroById(@PathVariable("id") int id) {
-        superhumanRepository.deleteById(id);
-        return "The hero ID = " + id + " has been removed";
-    }
-
+    @CrossOrigin
     @GetMapping("/heroes")
     public @ResponseBody
     Iterable<Superhuman> getAllHeroes() {
@@ -216,16 +115,100 @@ public class SuperhumanController {
         return superhumanRepository.findAll();
     }
 
-    @GetMapping("/heroById/{id}")
+    @CrossOrigin
+    @GetMapping("/heroes/{id}")
     public @ResponseBody
     Optional<Superhuman> getHeroById(@PathVariable("id") int id) {
         // This returns a JSON or XML with the users
         return superhumanRepository.findById(id);
     }
 
-//    @GetMapping("/weaponByHeroId/{id}")
-//    public @ResponseBody
-//    Iterable<Weapon> getWeaponByHeroId(@PathVariable("id") int id) {
-//        return weaponRepository.fi
-//    }
+    @CrossOrigin
+    @PutMapping("/heroes/{id}")
+    public @ResponseBody
+    String updateHeroById(@PathVariable("id") int id, @RequestBody Map<String,Object> body) {
+        // delete the existing superhuman first (this is to avoid duplication in the weapons).
+        // TODO: need to fix this issue of duplicated weapons when save() directly
+        superhumanRepository.deleteById(id);
+        // put the new updated one in
+        if (body.get("type").toString().equals("hero")) {
+            Hero h = createNewHeroWithId(id, body);
+            superhumanRepository.save(h);
+            return "Saved: " + h;
+        } else if (body.get("type").toString().equals("villain")) {
+            Villain v = createNewVillainWithId(id, body);
+            superhumanRepository.save(v);
+            return "Saved: " + v;
+        }
+        return "Error: wrong superhuman type";
+    }
+
+    @CrossOrigin
+    @DeleteMapping("/heroes")
+    public @ResponseBody
+    String removeAllHeroes() {
+        superhumanRepository.deleteAll();
+        return "All data has been removed.";
+    }
+
+    @CrossOrigin
+    @DeleteMapping("/heroes/{id}")
+    public @ResponseBody
+    String removeHeroById(@PathVariable("id") int id) {
+        superhumanRepository.deleteById(id);
+        return "The hero ID = " + id + " has been removed";
+    }
+
+    private Hero createNewHeroWithId(int id, Map<String,Object> body) {
+        Hero h = new Hero();
+        h.setId(id);
+        h.setName(body.get("name").toString());
+        h.setRealname(body.get("realname").toString());
+        h.setSuperpower(body.get("superpower").toString());
+        h.setImageURL(body.get("imageURL").toString());
+        if (body.get("weapons") != null) {
+            h.setWeapons(createWeaponList((ArrayList<Map<String,Object>>) body.get("weapons"), h));
+        }
+        if (body.get("humanFriends") != null) {
+            h.setHumanFriends(createFriendList((ArrayList<Map<String,Object>>) body.get("humanFriends"), h));
+        }
+        return h;
+    }
+
+    private Villain createNewVillainWithId(int id, Map<String,Object> body) {
+        Villain v = new Villain();
+        v.setId(id);
+        v.setName(body.get("name").toString());
+        v.setOrigin(body.get("origin").toString());
+        v.setSuperpower(body.get("superpower").toString());
+        v.setImageURL(body.get("imageURL").toString());
+        if (body.get("weapons") != null) {
+            v.setWeapons(createWeaponList((ArrayList<Map<String, Object>>) body.get("weapons"), v));
+        }
+        if (body.get("humanFriends") != null) {
+            v.setHumanFriends(createFriendList((ArrayList<Map<String, Object>>) body.get("humanFriends"), v));
+        }
+        return v;
+    }
+
+    private List<Weapon> createWeaponList(ArrayList<Map<String,Object>> weapons, Superhuman h) {
+        List<Weapon> weaponList = new ArrayList<>();
+        for (Map<String,Object> o: weapons) {
+            System.out.println(o);
+            Weapon w = new Weapon(o.get("name").toString(), o.get("description").toString(), h);
+            weaponList.add(w);
+        }
+        return weaponList;
+    }
+
+    private List<Human> createFriendList(ArrayList<Map<String,Object>> friends, Superhuman h) {
+        List<Human> friendList = new ArrayList<>();
+        for (Map<String,Object> o: friends) {
+            System.out.println(o);
+            Human friend = new Human(Integer.parseInt(o.get("id").toString()), o.get("name").toString());
+            friend.addFriend(h);
+            friendList.add(friend);
+        }
+        return friendList;
+    }
 }
