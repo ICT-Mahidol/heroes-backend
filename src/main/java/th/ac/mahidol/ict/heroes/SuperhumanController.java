@@ -5,7 +5,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import th.ac.mahidol.ict.heroes.model.*;
 import th.ac.mahidol.ict.heroes.repositories.SuperhumanRepository;
-import th.ac.mahidol.ict.heroes.repositories.WeaponRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,18 +15,18 @@ import java.util.Optional;
 public class SuperhumanController {
     @Autowired
     private SuperhumanRepository superhumanRepository;
-    @Autowired
-    private WeaponRepository weaponRepository;
 
     @CrossOrigin
-    @GetMapping("/") // Map ONLY GET Requests
+    @GetMapping("/")
     public @ResponseBody
     String welcome () {
+        // show the welcome page at the root
         return "Hello, welcome to the Heroes application";
     }
 
+    // no longer used
     @CrossOrigin
-    @GetMapping("/addGet") // Map ONLY GET Requests
+    @GetMapping("/addGet")
     public @ResponseBody
     String addNewHero (
             @RequestParam int id
@@ -111,7 +110,7 @@ public class SuperhumanController {
     @GetMapping("/heroes")
     public @ResponseBody
     Iterable<Superhuman> getAllHeroes() {
-        // This returns a JSON or XML with the users
+        // This returns list of JSON objects of all the heroes
         return superhumanRepository.findAll();
     }
 
@@ -119,7 +118,7 @@ public class SuperhumanController {
     @GetMapping("/heroes/{id}")
     public @ResponseBody
     Optional<Superhuman> getHeroById(@PathVariable("id") int id) {
-        // This returns a JSON or XML with the users
+        // This returns a JSON object of the selected hero
         return superhumanRepository.findById(id);
     }
 
@@ -147,6 +146,7 @@ public class SuperhumanController {
     @DeleteMapping("/heroes")
     public @ResponseBody
     String removeAllHeroes() {
+        // delete all the heroes
         superhumanRepository.deleteAll();
         return "All data has been removed.";
     }
@@ -155,11 +155,13 @@ public class SuperhumanController {
     @DeleteMapping("/heroes/{id}")
     public @ResponseBody
     String removeHeroById(@PathVariable("id") int id) {
+        // delete a specific hero
         superhumanRepository.deleteById(id);
         return "The hero ID = " + id + " has been removed";
     }
 
     private Hero createNewHeroWithId(int id, Map<String,Object> body) {
+        // create a new hero with the given info
         Hero h = new Hero();
         h.setId(id);
         h.setName(body.get("name").toString());
@@ -176,6 +178,7 @@ public class SuperhumanController {
     }
 
     private Villain createNewVillainWithId(int id, Map<String,Object> body) {
+        // create a new villain with the given info
         Villain v = new Villain();
         v.setId(id);
         v.setName(body.get("name").toString());
