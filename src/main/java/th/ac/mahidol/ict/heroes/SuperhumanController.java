@@ -95,10 +95,7 @@ public class SuperhumanController {
         return "The hero ID = " + id + " has been removed";
     }
 
-    private Hero createNewHeroWithId(int id, Map<String,Object> body) {
-        // create a new hero with the given info
-        Hero h = new Hero();
-        h.setId(id);
+    private Hero setHeroInfo(Hero h, Map<String,Object> body) {
         h.setName(body.get("name").toString());
         h.setType(body.get("type").toString());
         h.setRealname(body.get("realname").toString());
@@ -113,10 +110,20 @@ public class SuperhumanController {
         return h;
     }
 
-    private Villain createNewVillainWithId(int id, Map<String,Object> body) {
-        // create a new villain with the given info
-        Villain v = new Villain();
-        v.setId(id);
+    private Hero createNewHeroWithId(int id, Map<String,Object> body) {
+        // create a new hero with the given info
+        Hero h = new Hero();
+        h.setId(id);
+        return setHeroInfo(h, body);
+    }
+
+    private Hero updateHeroWithId(int id, Map<String,Object> body) {
+        // create a new hero with the given info
+        Hero h = (Hero) superhumanRepository.findById(id).get();
+        return setHeroInfo(h, body);
+    }
+
+    private Villain setVillainInfo(Villain v, Map<String,Object> body) {
         v.setName(body.get("name").toString());
         v.setType(body.get("type").toString());
         v.setOrigin(body.get("origin").toString());
@@ -129,6 +136,19 @@ public class SuperhumanController {
             v.setHumanFriends(createFriendList((ArrayList<Map<String, Object>>) body.get("humanFriends"), v));
         }
         return v;
+    }
+
+    private Villain createNewVillainWithId(int id, Map<String,Object> body) {
+        // create a new villain with the given info
+        Villain v = new Villain();
+        v.setId(id);
+        return setVillainInfo(v, body);
+    }
+
+    private Villain updateVillainWithId(int id, Map<String,Object> body) {
+        // create a new villain with the given info
+        Villain v = (Villain) superhumanRepository.findById(id).get();
+        return setVillainInfo(v, body);
     }
 
     private List<Weapon> createWeaponList(ArrayList<Map<String,Object>> weapons, Superhuman h) {
@@ -145,7 +165,7 @@ public class SuperhumanController {
         List<Human> friendList = new ArrayList<>();
         for (Map<String,Object> o: friends) {
             System.out.println(o);
-            Human friend = new Human(Integer.parseInt(o.get("id").toString()), o.get("name").toString());
+            Human friend = new Human(o.get("name").toString());
             friend.addFriend(h);
             friendList.add(friend);
         }

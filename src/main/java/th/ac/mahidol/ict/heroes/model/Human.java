@@ -10,6 +10,7 @@ import java.util.List;
 @Entity
 public class Human {
     @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
     private int id;
     private String name;
 
@@ -26,8 +27,7 @@ public class Human {
 
     }
 
-    public Human(int id, String name) {
-        this.id = id;
+    public Human(String name) {
         this.name = name;
         this.superhumanFriends = new ArrayList<>();
     }
