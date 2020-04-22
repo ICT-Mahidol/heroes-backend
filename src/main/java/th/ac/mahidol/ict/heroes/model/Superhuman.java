@@ -8,6 +8,7 @@ import java.util.List;
 public class Superhuman {
     @Id
     private Integer id;
+    private String type;
     private String name;
     private String superpower;
     private String imageURL;
@@ -23,9 +24,10 @@ public class Superhuman {
 
     }
 
-    public Superhuman(int id, String name, String superpower, String imageURL, List<Human> humanFriends) {
+    public Superhuman(int id, String name, String type, String superpower, String imageURL, List<Human> humanFriends) {
         this.id = id;
         this.name = name;
+        this.type = type;
         this.superpower = superpower;
         this.imageURL = imageURL;
         this.humanFriends = humanFriends;
@@ -77,6 +79,14 @@ public class Superhuman {
 
     public void setImageURL(String image) {
         this.imageURL = image;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     @Override

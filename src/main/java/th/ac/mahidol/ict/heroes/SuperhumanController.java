@@ -24,71 +24,6 @@ public class SuperhumanController {
         return "Hello, welcome to the Heroes application";
     }
 
-    // no longer used
-    @CrossOrigin
-    @GetMapping("/addGet")
-    public @ResponseBody
-    String addNewHero (
-            @RequestParam int id
-            , @RequestParam String name
-            , @RequestParam(required=false) String realname
-            , @RequestParam(required=false) String origin
-            , @RequestParam String imageURL
-            , @RequestParam String superpower
-            , @RequestParam String type
-            , @RequestParam(required=false) String weapons
-            , @RequestParam(required=false) String friends){
-        if (type.equals("hero")) {
-            Hero h = new Hero();
-            h.setId(id);
-            h.setName(name);
-            h.setRealname(realname);
-            h.setSuperpower(superpower);
-            h.setImageURL(imageURL);
-            if (weapons != null) {
-                String[] weaponArray = weapons.split(";");
-                List<Weapon> weaponList = new ArrayList<>();
-                for (String w : weaponArray) {
-                    String[] warray = w.split(",");
-                    weaponList.add(new Weapon(warray[0], warray[1], h));
-                }
-                h.setWeapons(weaponList);
-            }
-            if (friends != null) {
-                String[] friendArray = friends.split(";");
-                List<Human> friendList = new ArrayList<>();
-                for (String f: friendArray) {
-                    String[] farray = f.split(",");
-                    Human friend = new Human(Integer.valueOf(farray[0]), farray[1]);
-                    friend.addFriend(h);
-                    friendList.add(friend);
-                }
-                h.setHumanFriends(friendList);
-            }
-            superhumanRepository.save(h);
-            return "Saved: " + h;
-        } else if (type.equals("villain")) {
-            Villain v = new Villain();
-            v.setId(id);
-            v.setName(name);
-            v.setOrigin(origin);
-            v.setSuperpower(superpower);
-            v.setImageURL(imageURL);
-            if (weapons != null) {
-                String[] weaponArray = weapons.split(";");
-                List<Weapon> weaponList = new ArrayList<>();
-                for (String w : weaponArray) {
-                    String[] warray = w.split(",");
-                    weaponList.add(new Weapon(warray[0], warray[1], v));
-                }
-                v.setWeapons(weaponList);
-            }
-            superhumanRepository.save(v);
-            return "Saved: " + v;
-        }
-        return "Error: wrong superhuman type";
-    }
-
     @CrossOrigin
     @PostMapping("/heroes")
     public @ResponseBody
@@ -165,6 +100,7 @@ public class SuperhumanController {
         Hero h = new Hero();
         h.setId(id);
         h.setName(body.get("name").toString());
+        h.setType(body.get("type").toString());
         h.setRealname(body.get("realname").toString());
         h.setSuperpower(body.get("superpower").toString());
         h.setImageURL(body.get("imageURL").toString());
@@ -182,6 +118,7 @@ public class SuperhumanController {
         Villain v = new Villain();
         v.setId(id);
         v.setName(body.get("name").toString());
+        v.setType(body.get("type").toString());
         v.setOrigin(body.get("origin").toString());
         v.setSuperpower(body.get("superpower").toString());
         v.setImageURL(body.get("imageURL").toString());

@@ -12,8 +12,8 @@ public class Villain extends Superhuman {
 
     }
 
-    public Villain(int id, String name, String superpower, String origin, String imageURL, List<Human> humanFriends) {
-        super(id, name, superpower, imageURL, humanFriends);
+    public Villain(int id, String name, String type, String superpower, String origin, String imageURL, List<Human> humanFriends) {
+        super(id, name, type, superpower, imageURL, humanFriends);
         this.origin = origin;
     }
 

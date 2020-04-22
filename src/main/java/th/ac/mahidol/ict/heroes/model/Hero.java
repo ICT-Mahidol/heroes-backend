@@ -11,8 +11,8 @@ public class Hero extends Superhuman {
 
     }
 
-    public Hero(int id, String name, String superpower, String realname, String imageURL, List<Human> humanFriends) {
-        super(id, name, superpower, imageURL, humanFriends);
+    public Hero(int id, String name, String type, String superpower, String realname, String imageURL, List<Human> humanFriends) {
+        super(id, name, type, superpower, imageURL, humanFriends);
         this.realname = realname;
     }
 
