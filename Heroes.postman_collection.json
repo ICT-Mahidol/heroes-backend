@@ -1,0 +1,360 @@
+{
+	"info": {
+		"_postman_id": "71cc69b5-5319-4cab-b822-21cd1d76edd4",
+		"name": "Heroes",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Local-All Heroes",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/heroes",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"heroes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Local-GetById",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/heroes/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"heroes",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Local-Add-IronMan",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "id",
+						"value": "3",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "name",
+						"value": "Hulk",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "realname",
+						"value": "Can't remember",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "superpower",
+						"value": "strength",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "type",
+						"value": "hero",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "imageURL",
+						"value": "http//test.png",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 1,\n    \"name\": \"Iron Man\",\n    \"type\": \"hero\", \n    \"superpower\": \"wealth\",\n    \"imageURL\": \"https://vignette.wikia.nocookie.net/future-fight/images/f/fb/Iron_Man_Uniform_I.png\",\n    \"humanFriends\": [\n        {\n            \"name\": \"Happy\"\n        }\n    ],\n    \"weapons\": [\n        {\n            \"name\": \"Lasers\",\n            \"description\": \"Powerful lasers\"\n        },\n        {\n            \"name\": \"Energy blade\",\n            \"description\": \"Sharp blades\"\n        },\n        {\n            \"name\": \"Missiles\",\n            \"description\": \"Long-range missiles\"\n        }\n    ],\n    \"realname\": \"Tony Stark\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/heroes",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"heroes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Local-Add-Spider-Man",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "id",
+						"type": "text",
+						"value": "3",
+						"disabled": true
+					},
+					{
+						"key": "name",
+						"type": "text",
+						"value": "Hulk",
+						"disabled": true
+					},
+					{
+						"key": "realname",
+						"type": "text",
+						"value": "Can't remember",
+						"disabled": true
+					},
+					{
+						"key": "superpower",
+						"type": "text",
+						"value": "strength",
+						"disabled": true
+					},
+					{
+						"key": "type",
+						"type": "text",
+						"value": "hero",
+						"disabled": true
+					},
+					{
+						"key": "imageURL",
+						"type": "text",
+						"value": "http//test.png",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 2,\n    \"type\": \"hero\",\n    \"name\": \"Spider-Man\",\n    \"superpower\": \"Spider Sense\",\n    \"imageURL\": \"https://vignette.wikia.nocookie.net/marvel-contestofchampions/images/a/a9/Spider-Man_%28Stark_Enhanced%29_portrait.png\",\n    \"humanFriends\": [\n        {\n            \"name\": \"Ned\"\n        }\n    ],\n    \"weapons\": [\n        {\n            \"name\": \"Spider web\",\n            \"description\": \"Lots of web\"\n        },\n        {\n            \"name\": \"Mechanical arms\",\n            \"description\": \"Lots of arm\"\n        }\n    ],\n    \"realname\": \"Peter Parker\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/heroes",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"heroes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Local-Add-Thanos",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "id",
+						"value": "3",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "name",
+						"value": "Hulk",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "realname",
+						"value": "Can't remember",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "superpower",
+						"value": "strength",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "type",
+						"value": "hero",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "imageURL",
+						"value": "http//test.png",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 3,\n    \"type\": \"villain\",\n    \"name\": \"Thanos\",\n    \"superpower\": \"Strength\",\n    \"imageURL\": \"https://vignette.wikia.nocookie.net/unofficial-leftypol-discord/images/0/06/Thanos.png\",\n    \"weapons\": [\n        {\n            \"name\": \"Gaunlet\",\n            \"description\": \"Big gaunlet\"\n        },\n        {\n            \"name\": \"Infinity stones\",\n            \"description\": \"5 powerful gems\"\n        },\n        {\n            \"name\": \"Double-edged sword\",\n            \"description\": \"Sharp sword\"\n        }\n    ],\n    \"origin\": \"Titan\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/heroes",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"heroes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Local-DeleteById",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/heroes/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"heroes",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Local-Clean",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/heroes",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"heroes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Local-UpdateById",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"type\": \"hero\",\n        \"id\": 1,\n        \"name\": \"Iron Man-X\",\n        \"superpower\": \"Wealth-X\",\n        \"imageURL\": \"https://vignette.wikia.nocookie.net/future-fight/images/f/fb/Iron_Man_Uniform_I.png\",\n        \"humanFriends\": [\n            {\n                \"name\": \"Happy\"\n            }\n        ],\n        \"weapons\": [\n            {\n                \"name\": \"Lasers-X\",\n                \"description\": \"Powerful lasers\"\n            },\n            {\n                \"name\": \"Energy blade-X\",\n                \"description\": \"Sharp blades\"\n            },\n            {\n                \"name\": \"Missiles-X\",\n                \"description\": \"Long-range missiles\"\n            }\n        ],\n        \"realname\": \"Tony Stark-X\"\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/heroes/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"heroes",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Local-UpdateById-3",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"type\": \"villain\",\n    \"id\": 3,\n    \"name\": \"Thanos-X\",\n    \"superpower\": \"Strength-X\",\n    \"imageURL\": \"https://vignette.wikia.nocookie.net/unofficial-leftypol-discord/images/0/06/Thanos.png-X\",\n    \"origin\": \"Titan\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/heroes/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"heroes",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Local-Photo-Iron-Man",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/ironman.jpg",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"ironman.jpg"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
