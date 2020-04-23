@@ -15,7 +15,7 @@ import java.util.Optional;
 public class SuperhumanController {
     @Autowired
     private SuperhumanRepository superhumanRepository;
-
+    
     @CrossOrigin
     @GetMapping("/")
     public @ResponseBody
