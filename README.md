@@ -6,11 +6,11 @@ This is a back-end part of the **Heroes** project discussed in the ITCS431 Softw
 The project is implemented as a RESTful web service using Spring Boot framework. It allows the following APIs:
 
 
-Function | Type | URL
--------- | ---- | ---
-Add a hero | POST | https://gentle-savannah-29367.herokuapp.com/heroes   
-Get all heroes | GET |  https://gentle-savannah-29367.herokuapp.com/heroes  
-Get a hero by ID | GET | https://gentle-savannah-29367.herokuapp.com/heroes/{id} 
-Update a hero by ID | PUT | https://gentle-savannah-29367.herokuapp.com/heroes/{id} 
-Delete a hero by ID | DELETE | https://gentle-savannah-29367.herokuapp.com/heroes/{id} 
-Delete all heroes | DELETE | https://gentle-savannah-29367.herokuapp.com/heroes 
+Function | Type | URL | Example
+-------- | ---- | --- | ---
+Add a hero | POST | http://localost:8080/heroes | 
+Get all heroes | GET |  http://localost:8080/heroes | http://localost:8080/heroes
+Get a hero by ID | GET | http://localost:8080/heroes/{id} | http://localost:8080/heroes/1
+Update a hero by ID | PUT | http://localost:8080/heroes/{id} | 
+Delete a hero by ID | DELETE | http://localost:8080/heroes/{id} | http://localost:8080/heroes/1
+Delete all heroes | DELETE | http://localost:8080/heroes 
