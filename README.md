@@ -12,5 +12,5 @@ Add a hero | POST | http://localhost:8080/heroes |
 Get all heroes | GET |  http://localhost:8080/heroes | http://localhost:8080/heroes
 Get a hero by ID | GET | http://localhost:8080/heroes/{id} | http://localhost:8080/heroes/1
 Update a hero by ID | PUT | http://localhost:8080/heroes/{id} | 
-Delete a hero by ID | DELETE | http://localhost:8080/heroes/{id} | http://localhost:8080/heroes/1
+Delete a hero by ID | DELETE | http://localhost:8080/heroes/{id} |
 Delete all heroes | DELETE | http://localhost:8080/heroes 
