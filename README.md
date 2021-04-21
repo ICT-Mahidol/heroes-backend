@@ -1,7 +1,7 @@
 # Heroes
-A Superhero Project for ITCS431 Course (2019).
+A Superhero Project for ITCS431 Course.
 
-This is a back-end part of the **Heroes** project discussed in the ITCS431 Software Design and Development course Semester 2/2019. 
+This is a back-end part of the **Heroes** project discussed in the ITCS431 Software Design and Development course. 
 
 The project is implemented as a RESTful web service using Spring Boot framework. It allows the following APIs:
 
